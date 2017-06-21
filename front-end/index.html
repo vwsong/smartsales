@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nordstrom | WishList</title>
+
+    <!-- FAVICON-->
+    <link rel="apple-touch-icon" sizes="57x57" href="apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- LIBRARIES-->
+    <link type="text/css" rel="stylesheet" href="lib/bootstrap3.3.7/css/bootstrap.min.css"/>
+    <link type="text/css" rel="stylesheet" href="lib/bootstrap-select1.12.2/bootstrap-select.min.css"/>
+
+    <!-- CUSTOM CSS -->
+    <link type="text/css" rel="stylesheet" href="css/index.css"/>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                    <img alt="Brand" id="logo" src="img/logo.png">
+                </a>
+            </div>
+        </div>
+    </nav>
+    <!-- END NAVBAR -->
+
+    <div class="container main-content">
+        <div class="row">
+            <div id="profile-col" class="col-md-3">
+                <div id="profile-image">
+                    <img src="img/default_profile.png" alt="Profile Image"/>
+                </div>
+                <div id="profile-description">
+
+                    <!-- AGE -->
+                    <div class="form-group">
+                        <label for="inputAge">Age:</label>
+                        <input type="number" class="form-control" id="inputAge" placeholder="Enter Age" min="13" max="99">
+                    </div>
+
+                    <!-- GENDER -->
+                    <div class="form-group">
+                        <label for="inputGender">Gender:</label>
+                        <select class="form-control" id="inputGender">
+                            <option></option>
+                            <option>Male</option>
+                            <option>Female</option>
+                            <option>Non-Binary</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+
+                    <!-- ETHNICITY-->
+                    <div class="form-group">
+                        <label for="inputEthnicity">Ethnicity:</label>
+                        <select class="form-control" id="inputEthnicity">
+                            <option></option>
+                            <option>White</option>
+                            <option>Black</option>
+                            <option>Native American</option>
+                            <option>Asian American</option>
+                            <option>Native Hawaiian</option>
+                            <option>Middle Eastern American</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div id="items-col" class="col-md-9">
+
+            </div>
+        </div>
+    </div>
+
+    <!-- LIBRARIES -->
+    <script src="lib/jquery-3.2.1.min.js"></script>
+    <script src="lib/bootstrap3.3.7/js/bootstrap.min.js"></script>
+    <script src="lib/bootstrap-select1.12.2/bootstrap-select.min.js"></script>
+
+</body>
+</html>
