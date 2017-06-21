@@ -52,8 +52,8 @@ def getRegSale(ageMin, ageMax, gender, ethnicity, coverage, zipcode, discount):
             currCoverage = customerList/totalDemographic
             if currCoverage > coverage:
                 break
-
-    return { "customerList" : customerList, "itemList" : itemList, "totalCost" : totalCost*discount, "coverage" : currCoverage }
+    output = { "customerList" : customerList, "itemList" : itemList, "totalCost" : totalCost*discount, "coverage" : currCoverage }
+    return json.dumps(output)
 
 def getEfficientSale(ageMin, ageMax, gender, ethnicity, coverage, zipcode, discount):
     return "getEffSale() not implemented"
