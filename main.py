@@ -1,11 +1,12 @@
-from flask import Flask
+from flask import Flask, render_template, request, url_for
 import helper
+import algo
 
 app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-    return 'Hello, World!'
+    return helper.sayHello()
 
 @app.route("/api/getSale/", methods=['POST'])
 def getSale():
@@ -16,8 +17,8 @@ def getSale():
     efficiency = request.form["efficiency"]
     coverage = request.form["coverage"]
     discount = request.form["discount"]
-    return 'Hello'
-        # if efficiency:
-        #     return getEfficientSale(ageMin, ageMax, gender, ethnicity, coverage, discount)
-        # else:
-        #     return getRegSale(ageMin, ageMax, gender, ethnicity, coverage, discount)
+    zipcode = request.form["zipcode"]
+    if efficiency:
+        return algo.getEfficientSale(ageMin, ageMax, gender, ethnicity, coverage, discount, zipcode)
+    else:
+        return algo.getRegSale(ageMin, ageMax, gender, ethnicity, coverage, discount, zipcode)
