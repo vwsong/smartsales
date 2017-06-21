@@ -6,9 +6,18 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-    return helper.sayHello()
+    code = int(request.args["gender"])
 
-@app.route("/api/getSale/", methods=['POST'])
+    if code == 1:
+        return "Female"
+    elif code == 2:
+        return "Male"
+    elif code == 3:
+        return "Nonbinary"
+    else:
+        return "Other"
+
+@app.route("/api/getSale/", methods=['POST']) #change to get
 def getSale():
     ageMin = request.form["ageMin"]
     ageMax = request.form["ageMax"]
