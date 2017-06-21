@@ -56,7 +56,7 @@ def getRegSale(ageMin, ageMax, gender, ethnicity, coverage, zipcode, discount):
     return json.dumps(output)
 
 def getEfficientSale(ageMin, ageMax, gender, ethnicity, coverage, zipcode, discount):
-    return json.dumps({"code" : "501", "message" : "getEffSale() not implemented"}
+    return json.dumps({"code" : "501", "message" : "getEffSale() not implemented"})
 
 def getMinimalSale(ageMin, ageMax, gender, ethnicity, coverage, zipcode, discount):
-    return json.dumps({"code" : "501", "message" : "getMinimalSale() not implemented"}
+    return json.dumps({"code" : "501", "message" : "getMinimalSale() not implemented"})
