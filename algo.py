@@ -21,7 +21,7 @@ def targetDemographic(cData, iData, ageMin, ageMax, gender, ethnicity, coverage,
     if zipcode != -1:
         totalDemographic = {k: v for k, v in cData.items() if v["address"]["zipcode"] == ethnicity}
 
-    return totalDemographic #a subset of cData
+    return totalDemographic # a subset of cData that matches given demographics!
 
 def getRegSale(ageMin, ageMax, gender, ethnicity, coverage, zipcode, discount):
     cData = getCustDataFromRedis()
@@ -34,7 +34,7 @@ def getRegSale(ageMin, ageMax, gender, ethnicity, coverage, zipcode, discount):
     for key in iData.keys():
         interestedPersons = iData[key]["interestedPersons"]
 
-        #Begin filtering!
+        # Begin filtering!
         interestedPersons = [person for person in interestedPersons if cData[person]["age"] > ageMin and cData[person]["age"] < ageMax]
         if gender != -1:
             interestedPersons = [person for person in interestedPersons if cData[person]["gender"] == gender]
@@ -56,7 +56,7 @@ def getRegSale(ageMin, ageMax, gender, ethnicity, coverage, zipcode, discount):
     return json.dumps(output)
 
 def getEfficientSale(ageMin, ageMax, gender, ethnicity, coverage, zipcode, discount):
-    return "getEffSale() not implemented"
+    return json.dumps({"code" : "501", "message" : "getEffSale() not implemented"}
 
 def getMinimalSale(ageMin, ageMax, gender, ethnicity, coverage, zipcode, discount):
-    return "getMinimalSale() not implemented"
+    return json.dumps({"code" : "501", "message" : "getMinimalSale() not implemented"}
