@@ -35,11 +35,11 @@ def getSale():
     coverage = request.form["coverage"]
     discount = request.form["discount"]
     zipcode = request.form["zipcode"]
-    return 'Hello'
     if efficiency:
         return getEfficientSale(ageMin, ageMax, gender, ethnicity, coverage, discount)
-     else:
+    else:
          return getRegSale(ageMin, ageMax, gender, ethnicity, coverage, discount)
+    return 'Hello'
 
 @app.route("/api/subscribe", methods=['POST'])
 def redisAddCustomerData():
