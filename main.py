@@ -6,6 +6,10 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
+    return "hello world"
+
+@app.route('/test/')
+def test():
     code = int(request.args["gender"])
 
     if code == 1:
@@ -14,8 +18,10 @@ def hello_world():
         return "Male"
     elif code == 3:
         return "Nonbinary"
-    else:
+    elif code == 4:
         return "Other"
+    else:
+        return "Prefer not to say"
 
 @app.route("/api/getSale/", methods=['POST']) #change to get
 def getSale():
