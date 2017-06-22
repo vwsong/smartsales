@@ -10,6 +10,21 @@ app = Flask(__name__)
 def hello_world():
     return "helloWorld"
 
+@app.route('/test/')
+def test():
+    code = int(request.args["gender"])
+
+    if code == 1:
+        return "Female"
+    elif code == 2:
+        return "Male"
+    elif code == 3:
+        return "Nonbinary"
+    elif code == 4:
+        return "Other"
+    else:
+        return "Prefer not to say"
+
 @app.route("/api/getSale/", methods=['POST'])
 def getSale():
     ageMin = request.form["ageMin"]
