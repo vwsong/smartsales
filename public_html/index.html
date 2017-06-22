@@ -25,7 +25,6 @@
 
     <!-- LIBRARIES-->
     <link type="text/css" rel="stylesheet" href="lib/bootstrap3.3.7/css/bootstrap.min.css"/>
-    <link type="text/css" rel="stylesheet" href="lib/bootstrap-select1.12.2/bootstrap-select.min.css"/>
 
     <!-- CUSTOM CSS -->
     <link type="text/css" rel="stylesheet" href="css/index.css"/>
@@ -45,22 +44,17 @@
 
     <div class="container main-content">
         <div class="row">
+            <!-- PROFILE COLUMN -->
             <div id="profile-col" class="col-md-3">
                 <div id="profile-image">
                     <img src="img/default_profile.png" alt="Profile Image"/>
                 </div>
                 <div id="profile-description">
 
-                    <!-- AGE -->
-                    <div class="form-group">
-                        <label for="inputAge">Age:</label>
-                        <input type="number" class="form-control" id="inputAge" placeholder="Enter Age" min="13" max="99">
-                    </div>
-
                     <!-- GENDER -->
                     <div class="form-group">
                         <label for="inputGender">Gender:</label>
-                        <select class="form-control" id="inputGender">
+                        <select class="form-control" id="inputGender" required>
                             <option></option>
                             <option>Male</option>
                             <option>Female</option>
@@ -72,7 +66,7 @@
                     <!-- ETHNICITY-->
                     <div class="form-group">
                         <label for="inputEthnicity">Ethnicity:</label>
-                        <select class="form-control" id="inputEthnicity">
+                        <select class="form-control" id="inputEthnicity" required>
                             <option></option>
                             <option>White</option>
                             <option>Black</option>
@@ -83,10 +77,38 @@
                             <option>Other</option>
                         </select>
                     </div>
+
+                    <!-- AGE -->
+                    <div class="form-group">
+                        <label for="inputAge">Age:</label>
+                        <input type="number" class="form-control" id="inputAge" placeholder="Age" min="13" max="99" required>
+                    </div>
+
+                    <!-- ZIP CODE -->
+                    <div class="form-group">
+                        <label for="inputZip">Zip Code:</label>
+                        <input type="number" class="form-control" id="inputZip" placeholder="Zip Code" min="00501" max="99999" required>
+                    </div>
+
                 </div>
             </div>
-            <div id="items-col" class="col-md-9">
 
+            <!-- ITEMS COLUMN -->
+            <div id="items-col" class="col-md-9">
+                <div id="items-div">
+                    <h1>Item Select:</h1>
+                    <div class="item" id="div-5870872">
+                        <!--<img src="img/check.jpg" alt="itemImage" id="5870872"/>-->
+                    </div>
+                </div>
+
+                <div id="button-bar-bottom">
+                    <div class="center-row">
+                        <div class="center-col">
+                            <button name="button" type="button" class="btn" disabled>Submit</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -94,7 +116,9 @@
     <!-- LIBRARIES -->
     <script src="lib/jquery-3.2.1.min.js"></script>
     <script src="lib/bootstrap3.3.7/js/bootstrap.min.js"></script>
-    <script src="lib/bootstrap-select1.12.2/bootstrap-select.min.js"></script>
 
+    <!-- CUSTOM JS -->
+    <script src="js/test-items.js"></script>
+    <script src="js/index.js"></script>
 </body>
 </html>

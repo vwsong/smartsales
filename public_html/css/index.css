@@ -1,0 +1,164 @@
+
+/**********************************************************************************************************************/
+
+/* FONTS */
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
+/**********************************************************************************************************************/
+
+/* GENERAL */
+html, body {
+    height: 100vh;
+    width: 100vw;
+    overflow: auto;
+}
+
+body {
+    padding-top: 70px;
+}
+
+.main-content, .main-content .row {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+/**********************************************************************************************************************/
+
+/* NAVBAR */
+#logo {
+    height: 100%;
+}
+
+.navbar {
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid #000;
+    background-color: #fff;
+    min-height: 70px;
+}
+
+.container-fluid, .navbar-header, .navbar-header a {
+    height: 70px;
+}
+
+.navbar-header a {
+    padding: 23px 40px;
+}
+
+/**********************************************************************************************************************/
+
+/* PROFILE */
+#profile-col {
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 900;
+    overflow: auto;
+    background-color: #f6f6f6;
+    padding: 30px 0;
+}
+
+@media screen and (min-width: 992px){
+    #profile-col {
+        height: 100%;
+    }
+}
+
+#profile-image {
+    width: 75%;
+    margin: 20px auto;
+    text-align: center;
+}
+
+#profile-image img {
+    width: 100%;
+    max-width: 200px;
+    border: 1px solid black;
+    box-shadow: 0 5px 5px rgba(0,0,0,0.4);
+}
+
+#profile-description {
+    width: 80%;
+    margin: 40px auto;
+    background-color: #fff;
+    padding: 20px;
+}
+
+/**********************************************************************************************************************/
+
+/* ITEMS */
+#items-col {
+    height: 100%;
+    z-index: 0;
+    padding: 0 0 7% 0;
+    overflow: auto;
+}
+
+#items-div {
+    width: 100%;
+    padding: 20px 40px;
+}
+
+#button-bar-bottom {
+    width: 75%;
+    height: 12%;
+    background-color: transparent;
+
+    position: fixed;
+    bottom: 0;
+    text-align: center;
+    overflow: hidden;
+}
+
+@media screen and (max-width: 992px){
+    #button-bar-bottom {
+        width: 100%;
+    }
+}
+
+#button-bar-bottom button {
+    border-radius: 0;
+    width: 90%;
+    height: 3.5em;
+    background-color: #000;
+    color: #fff;
+}
+
+.center-row {
+    width: 100%;
+    height: 100%;
+    display: table;
+    margin: 0;
+}
+
+.center-col {
+    display: table-cell;
+    vertical-align: middle;
+    float: none;
+}
+
+h1 {
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 700;
+    padding-bottom: 10px;
+}
+
+.item {
+    width: 25%;
+    min-height: 100px;
+    overflow: hidden;
+    border: 1px solid black;
+    float: left;
+}
+.item img {
+    width: 100%;
+    position: relative;
+}
+.checkMark {
+    width: 25%;
+    left: 0;
+    top: 0;
+}
+#div-5870872 {
+    background-image: url("img/items/100706104.jpg");
+}
