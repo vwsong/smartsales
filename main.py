@@ -21,10 +21,10 @@ def getSale():
     discount = request.form["discount"]
     zipcode = request.form["zipcode"]
     return 'Hello'
-        # if efficiency:
-        #     return getEfficientSale(ageMin, ageMax, gender, ethnicity, coverage, discount)
-        # else:
-        #     return getRegSale(ageMin, ageMax, gender, ethnicity, coverage, discount)
+    if efficiency:
+        return getEfficientSale(ageMin, ageMax, gender, ethnicity, coverage, discount)
+     else:
+         return getRegSale(ageMin, ageMax, gender, ethnicity, coverage, discount)
 
 @app.route("/api/subscribe", methods=['POST'])
 def redisAddCustomerData():
@@ -47,21 +47,3 @@ def redisAddCustomerData():
     for x in savedItemIDs:
         r.sadd(x+'interestList', customerID)
     return 'Hello'
-
-def getCustDataFromRedis():
-    r = redis.StrictRedis(host="172.31.9.87", port=6379, db=0)
-    s = r.scan(0, "CustID-*")
-    dict = {}
-    for x in s[1]:
-        dict[x] = {}
-        dict[x]['age'] = r.hget(x,'age')
-        dict[x]['zipcode'] = r.hget(x,'zipcode')
-        dict[x]['ethnicity'] = r.hget(x,'ethnicity')
-        dict[x]['gender'] = r.hget(x,'gender')
-    return dict
-
-#def getItemDataFromRedis():
-    #r = redis.StrictRedis(host="172.31.9.87", port=6379, db=0)
-
-
-#def getItemDataSortedFromRedisQuantity():
