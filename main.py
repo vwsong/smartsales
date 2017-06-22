@@ -25,16 +25,16 @@ def test():
     else:
         return "Prefer not to say"
 
-@app.route("/api/getSale/", methods=['POST'])
+@app.route("/api/getSale/")
 def getSale():
-    ageMin = request.form["ageMin"]
-    ageMax = request.form["ageMax"]
-    gender = request.form["gender"]
-    ethnicity = request.form["ethnicity"]
-    efficiency = request.form["efficiency"]
-    coverage = request.form["coverage"]
-    discount = request.form["discount"]
-    zipcode = request.form["zipcode"]
+    ageMin = request.args["ageMin"]
+    ageMax = request.args["ageMax"]
+    gender = request.args["gender"]
+    ethnicity = request.args["ethnicity"]
+    efficiency = request.args["efficiency"]
+    coverage = request.args["coverage"]
+    discount = request.args["discount"]
+    zipcode = request.args["zipcode"]
     if efficiency:
         return getEfficientSale(ageMin, ageMax, gender, ethnicity, coverage, discount)
     else:
