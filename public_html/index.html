@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nordstrom | WishList</title>
+
+    <!-- FAVICON-->
+    <link rel="apple-touch-icon" sizes="57x57" href="apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- LIBRARIES-->
+    <link type="text/css" rel="stylesheet" href="lib/bootstrap3.3.7/css/bootstrap.min.css"/>
+
+    <!-- CUSTOM CSS -->
+    <link type="text/css" rel="stylesheet" href="css/index.css"/>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                    <img alt="Brand" id="logo" src="img/logo.png">
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container main-content">
+
+        <!-- SUCCESS ALERT-->
+        <div class="alert alert-success alert-dismissable hidden">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Success!</strong> Indicates a successful or positive action.
+        </div>
+
+        <div class="row">
+            <!-- PROFILE COLUMN -->
+            <div id="profile-col" class="col-md-3">
+                <div id="profile-image">
+                    <img src="img/default_profile.png" alt="Profile Image"/>
+                </div>
+                <div id="profile-description">
+
+                    <!-- GENDER -->
+                    <div class="form-group">
+                        <label for="inputGender">Gender:</label>
+                        <select class="form-control" id="inputGender" required>
+                            <option></option>
+                            <option data-id="1">Female</option>
+                            <option data-id="2">Male</option>
+                            <option data-id="3">Non-Binary</option>
+                            <option data-id="4">Other</option>
+                            <option data-id="5">Prefer Not To Say</option>
+                        </select>
+                    </div>
+
+                    <!-- ETHNICITY-->
+                    <div class="form-group">
+                        <label for="inputEthnicity">Ethnicity:</label>
+                        <select class="form-control" id="inputEthnicity" required>
+                            <option></option>
+                            <option data-id="1">White</option>
+                            <option data-id="2">Black</option>
+                            <option data-id="3">Native American</option>
+                            <option data-id="4">Asian American</option>
+                            <option data-id="5">Native Hawaiian</option>
+                            <option data-id="6">Middle Eastern American</option>
+                            <option data-id="7">Other</option>
+                            <option data-id="8">Prefer Not To Say</option>
+                        </select>
+                    </div>
+
+                    <!-- AGE -->
+                    <div class="form-group">
+                        <label for="inputAge">Age:</label>
+                        <input type="number" class="form-control" id="inputAge" placeholder="Age" min="13" max="99" required>
+                    </div>
+
+                    <!-- ZIP CODE -->
+                    <div class="form-group">
+                        <label for="inputZip">Zip Code:</label>
+                        <input type="number" class="form-control" id="inputZip" placeholder="Zip Code" min="00501" max="99999" required>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ITEMS COLUMN -->
+            <div id="items-col" class="col-md-9">
+
+                <div class="jumbotron" id="jumbotron-div">
+                    <button type="button" class="close" id="dismiss-jumbo">&times;</button>
+                    <h1>Smart Sales, your personal discount alert service.</h1>
+                    <p>Please select the items below that you would like to monitor for future discounts.</p>
+                    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+                </div>
+
+                <div id="items-div">
+                    <h1>Item Select:</h1>
+                </div>
+
+                <div id="button-bar-bottom">
+                    <div class="center-row">
+                        <div class="center-col">
+                            <button name="button" type="button" class="btn" id="submitBtn">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LIBRARIES -->
+    <script src="lib/jquery-3.2.1.min.js"></script>
+    <script src="lib/bootstrap3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- CUSTOM JS -->
+    <script src="js/test-items.js"></script>
+    <script src="js/index.js"></script>
+</body>
+</html>
