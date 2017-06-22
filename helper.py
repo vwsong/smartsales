@@ -1,10 +1,9 @@
-
 import redis
 import helper
 
 def getCustDataFromRedis():
     r = redis.StrictRedis(host="172.31.9.87", port=6379, db=0)
-    s = r.scan(0, "CustID-*")
+    s = r.keys("CustID-*")
     dict = {}
     for x in s[1]:
         dict[x] = {}
@@ -19,7 +18,7 @@ def sortByPrice(k):
 
 def sortByQuanity(k):
     r = redis.StrictRedis(host="172.31.9.87", port=6379, db=0)
-    return len(list(r.smembers(x+'interestList')))
+    return len(list(r.smembers('interestList-'+k)))
 
 def getItemDataFromRedis():
     r = redis.StrictRedis(host="172.31.9.87", port=6379, db=0)
@@ -28,7 +27,7 @@ def getItemDataFromRedis():
     for x in s[1]:
         dict[x] = {}
         dict[x]['price'] = int(r.hget(x,'price'))
-        dict[x]['interstedCustomers'] = r.smembers(x+'interestList')
+        dict[x]['interestedCustomers'] = r.smembers('interestList-'+x)
     return sorted(dict, key=sortByPrice)
 
 def getItemDataSortedFromRedisQuantity():
@@ -38,5 +37,5 @@ def getItemDataSortedFromRedisQuantity():
     for x in s[1]:
         dict[x] = {}
         dict[x]['price'] = int(r.hget(x,'price'))
-        dict[x]['interstedCustomers'] = r.smembers(x+'interestList')
+        dict[x]['interestedCustomers'] = r.smembers('interestList-'+x)
     return sorted(dict, key=sortByQuanity)

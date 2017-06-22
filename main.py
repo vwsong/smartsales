@@ -53,7 +53,7 @@ def redisAddCustomerData():
     zipcode = s['zipcode']
     phone = s['phone']
     email = s['email']
-    savedItemIDs = s['savedItems']
+    savedItemIDs = s['savedItemIDs']
     print(savedItemIDs)
     r.hset(customerID,"age", age)
     r.hset(customerID,"gender", gender)
@@ -63,5 +63,5 @@ def redisAddCustomerData():
     r.hset(customerID, "email", email)
     r.hset(customerID,"gender", gender)
     for x in savedItemIDs:
-        r.sadd(x+'interestList', customerID)
+        r.sadd('interestList-'+ str(x), customerID)
     return 'Hello'
