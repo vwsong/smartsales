@@ -98,7 +98,7 @@ $(document).ready(function(){
             $('#items-div')
                 .append('<div class="item" id="div-'+ mfItems[i] +'" data-selected="false"></div>');
             $('#div-' + mfItems[i])
-                .css('background-image', 'url("/smart-sales/public_html/img/items/' + mfItems[i] + '.jpg")')
+                .css('background-image', 'url("./img/items/' + mfItems[i] + '.jpg")')
                 .css('background-size', 'cover');
         }
 
@@ -106,7 +106,7 @@ $(document).ready(function(){
             $('#items-div')
                 .append('<div class="item" id="div-'+ mItems[i] +'" data-selected="false"></div>');
             $('#div-' + mItems[i])
-                .css('background-image', 'url("/smart-sales/public_html/img/items/men/' + mItems[i] + '.jpg")')
+                .css('background-image', 'url("./img/items/men/' + mItems[i] + '.jpg")')
                 .css('background-size', 'cover');
         }
 
@@ -114,7 +114,7 @@ $(document).ready(function(){
             $('#items-div')
                 .append('<div class="item" id="div-'+ fItems[i] +'" data-selected="false"></div>');
             $('#div-' + fItems[i])
-                .css('background-image', 'url("/smart-sales/public_html/img/items/women/' + fItems[i] + '.jpg")')
+                .css('background-image', 'url("./img/items/women/' + fItems[i] + '.jpg")')
                 .css('background-size', 'cover')
         }
     }
