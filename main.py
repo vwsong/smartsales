@@ -1,10 +1,12 @@
 from flask import Flask
 from flask import json
 from flask import request
+from flask_cors import CORS, cross_origin
 import redis
 import helper
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/')
 def hello_world():
@@ -51,17 +53,20 @@ def redisAddCustomerData():
     gender = s['gender']
     ethnicity = s['ethnicity']
     zipcode = s['zipcode']
-    phone = s['phone']
-    email = s['email']
+    print("ayo1")
+    # phone = s['phone']
+    # email = s['email']
     savedItemIDs = s['savedItemIDs']
     print(savedItemIDs)
     r.hset(customerID,"age", age)
     r.hset(customerID,"gender", gender)
     r.hset(customerID,"ethnicity", ethnicity)
     r.hset(customerID,"zipcode", gender)
-    r.hset(customerID,"phone", phone)
-    r.hset(customerID, "email", email)
+    print("ayo2")
+    # r.hset(customerID,"phone", phone)
+    # r.hset(customerID, "email", email)
     r.hset(customerID,"gender", gender)
+    print("ayo3")
     for x in savedItemIDs:
         r.sadd('interestList-'+ str(x), customerID)
     return 'Hello'
