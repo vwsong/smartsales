@@ -1,4 +1,5 @@
 import json
+import helper
 
 # def getEfficientSale(ageMin, ageMax, gender, ethnicity, coverage, discount):
 #     return json.dumps({"value" : "getEffSale"})
@@ -24,8 +25,8 @@ def targetDemographic(cData, iData, ageMin, ageMax, gender, ethnicity, coverage,
     return totalDemographic # a subset of cData that matches given demographics!
 
 def getRegSale(ageMin, ageMax, gender, ethnicity, coverage, zipcode, discount):
-    cData = getCustDataFromRedis()
-    iData = getItemDataFromRedis()
+    cData = helper.getCustDataFromRedis()
+    iData = helper.getItemDataFromRedis()
     customerList = []
     itemList = []
     totalCost = 0
