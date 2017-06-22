@@ -1,11 +1,4 @@
 from flask import Flask
-<<<<<<< Updated upstream
-app = Flask(__name__)
-
-@app.route("/")
-def hello():
-    return "Hello World!"
-=======
 from flask import json
 from flask import request
 import redis
@@ -72,4 +65,3 @@ def getCustDataFromRedis():
 
 
 #def getItemDataSortedFromRedisQuantity():
->>>>>>> Stashed changes
