@@ -131,39 +131,32 @@ $(document).ready(function(){
             age: age,
             gender: gender,
             ethnicity: ethnicity,
-            address: zip
-            // savedItems: clickedIDs
+            address: zip,
+            savedItems: clickedIDs
         };
 
-        $.post("https://qtpmimexld.localtunnel.me/api/subscribe", data, function(res){
-                alert("Thank you!");
-                location.href = "/smart-sales/?success=true";
-            })
-            .fail(function(err){
-                alert(JSON.stringify(err));
-                alert('Could not connect to the server. Please try again.');
-            });
-
-        // $.ajax({
-        //     url: 'https://qtpmimexld.localtunnel.me/api/subscribe',
-        //     type: 'POST',
-        //     contentType: 'application/json',
-        //     data: JSON.stringify({
-        //         customerID : 'CustID-' + customerID,
-        //         age: age,
-        //         gender: gender,
-        //         ethnicity: ethnicity,
-        //         address: zip,
-        //         savedItems: clickedIDs
-        //     }),
-        //     success: function(res){
+        // $.post("https://qtpmimexld.localtunnel.me/api/subscribe", data, function(res){
         //         alert("Thank you!");
         //         location.href = "/smart-sales/?success=true";
-        //     },
-        //     error: function(err){
-        //         alert(JSON.stringify(err));
+        //     })
+        //     .fail(function(err){
+        //         console.error(JSON.stringify(err));
         //         alert('Could not connect to the server. Please try again.');
-        //     }
-        // });
+        //     });
+
+        $.ajax({
+            url: 'https://qtpmimexld.localtunnel.me/api/subscribe',
+            type: 'POST',
+            contentType: 'application/json',
+            data: data,
+            success: function(res){
+                alert("Thank you!");
+                location.href = "/smart-sales/?success=true";
+            },
+            error: function(err){
+                alert(JSON.stringify(err));
+                alert('Could not connect to the server. Please try again.');
+            }
+        });
     }
 });
