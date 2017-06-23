@@ -1,41 +1,70 @@
-import redis
+import pyrebase
 import helper
 
-def getCustDataFromRedis():
-    r = redis.StrictRedis(host="172.31.9.87", port=6379, db=0)
-    s = r.keys("CustID-*")
+config = {
+    "apiKey": "AIzaSyDui6XMyO2Kryyy_5_QnKwbwvAgkJ2LDDc",
+    "authDomain": "smartsales-86a03.firebaseapp.com",
+    "databaseURL": "https://smartsales-86a03.firebaseio.com",
+    "storageBucket": "smartsales-86a03.appspot.com",
+}
+
+
+def getCustDataFromFirebase():
+    firebase = pyrebase.initialize_app(config)
+    auth = firebase.auth()
+    user = auth.sign_in_with_email_and_password('koolguru2@gmail.com','jayiscool')
+
     dict = {}
-    for x in s[1]:
-        dict[x] = {}
-        dict[x]['age'] = r.hget(x,'age')
-        dict[x]['zipcode'] = r.hget(x,'zipcode')
-        dict[x]['ethnicity'] = r.hget(x,'ethnicity')
-        dict[x]['gender'] = r.hget(x,'gender')
+    r = db.child("users").get()
+    for x in r.each():
+        print(x.key())
+        dict[x.key()] = {}
+        dict[x.key()]['address'] = db.child("users").child(x.key()).child("address").get().val()
+        dict[x.key()]['age'] = db.child("users").child(x.key()).child("age").get().val()
+        dict[x.key()]['email'] = db.child("users").child(x.key()).child("email").get().val()
+        dict[x.key()]['ethnicity'] = db.child("users").child(x.key()).child("ethnicity").get().val()
+        dict[x.key()]['gender'] = db.child("users").child(x.key()).child("gender").get().val()
+        dict[x.key()]['ethnicity'] = db.child("users").child(x.key()).child("ethnicity").get().val()
+        dict[x.key()]['savedItems'] = db.child("users").child(x.key()).child("savedItems").get().val()
+
     return dict
 
 def sortByPrice(k):
     return dict[k]['price']
 
 def sortByQuanity(k):
-    r = redis.StrictRedis(host="172.31.9.87", port=6379, db=0)
-    return len(list(r.smembers('interestList-'+k)))
+    return len(list(dict[k]['interestedPersons']))
 
-def getItemDataFromRedis():
-    r = redis.StrictRedis(host="172.31.9.87", port=6379, db=0)
+def getItemDataFromFirebase():
+    firebase = pyrebase.initialize_app(config)
+    auth = firebase.auth()
+    user = auth.sign_in_with_email_and_password('koolguru2@gmail.com','jayiscool')
     dict = {}
-    s = r.scan(0, "ItemID-*")
-    for x in s[1]:
+    r = db.child("items").get()
+    for x in r.each():
         dict[x] = {}
-        dict[x]['price'] = int(r.hget(x,'price'))
-        dict[x]['interestedCustomers'] = r.smembers('interestList-'+x)
+        dict[x.key()] = {}
+        if db.child("items").child(x.key()).child('interestedPersons').get().val() is None:
+            dict[x.key()]['interestedPersons'] = []
+        else:
+            dict[x.key()]['interestedPersons'] = (db.child("items").child(x.key()).child('interestedPersons').get().val()).values()
+        dict[x.key()]['name'] = db.child("items").child(x.key()).child('name').get().val()
+        dict[x.key()]['price'] = db.child("items").child(x.key()).child('price').get().val()
     return sorted(dict, key=sortByPrice)
 
-def getItemDataSortedFromRedisQuantity():
-    r = redis.StrictRedis(host="172.31.9.87", port=6379, db=0)
+def getItemDataSortedFromFirebaseQuantity():
+    firebase = pyrebase.initialize_app(config)
+    auth = firebase.auth()
+    user = auth.sign_in_with_email_and_password('koolguru2@gmail.com','jayiscool')
     dict = {}
-    s=rscan(0, "ItemID-*")
-    for x in s[1]:
+    r = db.child("items").get()
+    for x in r.each():
         dict[x] = {}
-        dict[x]['price'] = int(r.hget(x,'price'))
-        dict[x]['interestedCustomers'] = r.smembers('interestList-'+x)
+        dict[x.key()] = {}
+        if db.child("items").child(x.key()).child('interestedPersons').get().val() is None:
+            dict[x.key()]['interestedPersons'] = []
+        else:
+            dict[x.key()]['interestedPersons'] = (db.child("items").child(x.key()).child('interestedPersons').get().val()).values()
+        dict[x.key()]['name'] = db.child("items").child(x.key()).child('name').get().val()
+        dict[x.key()]['price'] = db.child("items").child(x.key()).child('price').get().val()
     return sorted(dict, key=sortByQuanity)
