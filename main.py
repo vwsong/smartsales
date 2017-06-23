@@ -47,7 +47,7 @@ def getSale():
 
 @app.route("/api/subscribe", methods=['POST'])
 def redisAddCustomerData():
-    r = redis.StrictRedis(host="172.31.9.87", port=6379, db=0)
+    r = redis.StrictRedis(host="smartsales-redis.hackathon.svc.cluster.local", port=6379, db=0)
     s = request.get_json(silent=True)
     print(s)
     customerID = s['customerID']
