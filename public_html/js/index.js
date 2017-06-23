@@ -11,6 +11,8 @@ $(document).ready(function(){
      * VARIABLES
      */
     var clickedIDs = [];
+    var ref = firebase.database().ref();
+
 
     /**
      * FUNCTIONS
@@ -56,12 +58,23 @@ $(document).ready(function(){
         $('#submitBtn').on('click', function(){
             var val = 0;
 
-            $("input").each(function(){
-                if (($(this).val()) === ""){
+            $("input").each(function() {
+
+                var id = $(this).attr('id');
+
+                if (($(this).val()) === "") {
                     $(this).addClass("error");
                     val = 1
                 }
-                else{
+                else if (id === 'inputAge' && (parseInt($(this).val()) > 99 || parseInt(($(this).val())) < 13)) {
+                    $(this).addClass("error");
+                    val = 1
+                }
+                else if (id === 'inputZip' && (parseInt($(this).val()) > 99999 || parseInt(($(this).val())) < 501)) {
+                    $(this).addClass("error");
+                    val = 1
+                }
+                else {
                     $(this).removeClass("error");
                 }
             });
@@ -120,43 +133,87 @@ $(document).ready(function(){
     }
 
     function sendDataToServer(){
-        var customerID = new Date().valueOf();
+        var customerID = 'CustID-' + generateDate();
         var age = $('#inputAge').val();
         var gender = $('#inputGender').find(':selected').data('id');
         var ethnicity = $('#inputEthnicity').find(':selected').data('id');
         var zip = $('#inputZip').val();
+        var email = $('#inputEmail').val();
 
-        var data = {
-            customerID : 'CustID-' + customerID,
+        var data = {};
+        data[customerID] = {
             age: age,
             gender: gender,
             ethnicity: ethnicity,
-            address: zip,
+            zip: zip,
+            email: email,
             savedItems: clickedIDs
         };
 
-        // $.post("https://qtpmimexld.localtunnel.me/api/subscribe", data, function(res){
-        //         alert("Thank you!");
-        //         location.href = "/smart-sales/?success=true";
-        //     })
-        //     .fail(function(err){
-        //         console.error(JSON.stringify(err));
-        //         alert('Could not connect to the server. Please try again.');
-        //     });
+        addCustomerToDB(data, customerID);
+    }
 
-        $.ajax({
-            url: 'https://qtpmimexld.localtunnel.me/api/subscribe',
-            type: 'POST',
-            contentType: 'application/json',
-            data: data,
-            success: function(res){
-                alert("Thank you!");
-                location.href = "/smart-sales/?success=true";
-            },
-            error: function(err){
-                alert(JSON.stringify(err));
-                alert('Could not connect to the server. Please try again.');
-            }
+    function addCustomerToDB(data, customerID){
+        ref.child('users/')
+            .update(data)
+            .then(function(){
+                addItemToDB(data, customerID);
+            })
+            .catch(function(error) {
+                console.error(JSON.stringify(error));
+                alert('Customer: Could not connect to the server. Please try again.');
+            });
+    }
+
+    function addItemToDB(data, customerID){
+
+        var savedItems = data[customerID].savedItems;
+        var i = 0;
+
+        savedItems.forEach(function(element){
+            ref.child('items/' + element + '/interestedPersons/')
+                .push(customerID)
+                .then(function(){
+                    i++;
+                    if (i === savedItems.length) {
+                        location.href = location.origin + location.pathname + "?success=true";
+                    }
+                }).catch(function(error) {
+                    console.error(JSON.stringify(error));
+                    alert('Item: Could not connect to the server. Please try again.');
+                });
         });
     }
+
+    function generateDate(){
+        var date = new Date();
+        var components = [
+            date.getYear(),
+            date.getMonth(),
+            date.getDate(),
+            date.getHours(),
+            date.getMinutes(),
+            date.getSeconds(),
+            date.getMilliseconds()
+        ];
+
+        return components.join("");
+    }
+
+    // function addItemDataToDB(){
+    //     for (var key in itemData){
+    //         if (itemData.hasOwnProperty(key)){
+    //             // "1"
+    //             ref.child('items/ItemID-' + key + '/')
+    //                 .update({
+    //                     "price" : itemData[key]['price'],
+    //                     "name" : itemData[key]['name']
+    //                 })
+    //                 .catch(function(error) {
+    //                     console.error(JSON.stringify(error));
+    //                     alert('Adding Item Info: Could not connect to the server. Please try again.');
+    //                 });
+    //         }
+    //     }
+    // }
 });
