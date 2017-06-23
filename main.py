@@ -50,7 +50,7 @@ def getSale():
 def changePrice():
     item = request.form["item"]
     price = request.form["price"]
-    iData = helper.getItemDataFromRedis()
+    iData = helper.getItemDataFromFirebasez()
     if iData[item]["price"] > price:
         iData[item]["price"] = price
         name = iData[item]["name"]
@@ -67,6 +67,10 @@ def changePrice():
 
     return "item price updated!"
 
+@app.route("/api/addSimulationData", methods=["GET"])
+def addSimulationData():
+    output = algo.simulationData()
+    return output + " added"
 
 @app.route("/api/subscribe", methods=['POST'])
 def redisAddCustomerData():

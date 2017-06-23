@@ -15,16 +15,16 @@ def generateSimulationData(cData, iData, groups):
             personAge = cData[person]["age"]
             personGender = cData[person]["gender"]
             if isAge(personAge, 0, 30):
-                if randint(1,100) <= groups[0][itemCounter]:
+                if randint(1,100) <= groups[0][itemCounter]*100:
                     iData[item]["interestedPersons"].append(person)
             if isAge(personAge, 31, 60):
-                if randint(1,100) <= groups[1][itemCounter]:
+                if randint(1,100) <= groups[1][itemCounter]*100:
                     iData[item]["interestedPersons"].append(person)
             if isAge(personAge, 61, 200):
-                if randint(1,100) <= groups[2][itemCounter]:
+                if randint(1,100) <= groups[2][itemCounter]*100:
                     iData[item]["interestedPersons"].append(person)
             if personGender == 2:
-                if randint(1,100) <= groups[3][itemCounter]:
+                if randint(1,100) <= groups[3][itemCounter]*100:
                     if not(person in iData[item]["interestedPersons"]):
                         iData[item]["interestedPersons"].append(person)
                 else
