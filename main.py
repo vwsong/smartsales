@@ -11,7 +11,7 @@ CORS(app)
 app.run(host='127.0.0.1', port=8000)
 
 @app.route('/')
-def hello_world():
+def_world():
     return "helloWorld"
 
 @app.route('/test/')
