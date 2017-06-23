@@ -56,6 +56,9 @@ def getRegSale(ageMin, ageMax, gender, ethnicity, coverage, zipcode, discount):
     output = { "customerList" : customerList, "itemList" : itemList, "totalCost" : totalCost*discount, "coverage" : currCoverage }
     return json.dumps(output)
 
+
+
+
 def getEfficientSale(ageMin, ageMax, gender, ethnicity, coverage, zipcode, discount):
     return json.dumps({"code" : "501", "message" : "getEffSale() not implemented"})
 
