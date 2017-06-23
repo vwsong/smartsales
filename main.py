@@ -3,8 +3,8 @@ from flask import json
 from flask import request
 from flask_cors import CORS, cross_origin
 from sparkpost import SparkPost
-import redis
 import helper
+import algo
 
 app = Flask(__name__)
 CORS(app)
@@ -40,10 +40,10 @@ def getSale():
     coverage = request.args["coverage"]
     discount = request.args["discount"]
     zipcode = request.args["zipcode"]
-    if efficiency:
-        return getEfficientSale(ageMin, ageMax, gender, ethnicity, coverage, discount)
+    if efficiency == "true":
+        return getEfficientSale(ageMin, ageMax, gender, ethnicity, coverage, zipcode, discount)
     else:
-         return getRegSale(ageMin, ageMax, gender, ethnicity, coverage, discount)
+         return algo.getRegSale(ageMin, ageMax, gender, ethnicity, coverage, zipcode, discount)
     return 'Hello'
 
 @app.route("/api/changePrice", methods=['POST'])

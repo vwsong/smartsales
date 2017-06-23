@@ -6,7 +6,7 @@ import helper
 #     return json.dumps({"value" : "getEffSale"})
 
 def isAge(given, ageMin, ageMax):
-    return given < ageMax & given > ageMin
+    return (given < ageMax) & (given > ageMin)
 
 def generateSimulationData(cData, iData, groups):
     itemCounter = 0
@@ -27,10 +27,10 @@ def generateSimulationData(cData, iData, groups):
                 if randint(1,100) <= groups[3][itemCounter]*100:
                     if not(person in iData[item]["interestedPersons"]):
                         iData[item]["interestedPersons"].append(person)
-                else
+                else:
                     if person in iData[item]["interestedPersons"]:
                         iData[item]["interestedPersons"].remove(person)
-        itemCounter++
+        itemCounter += 1
     return iData
 
 def simulationData():
@@ -51,53 +51,74 @@ def targetDemographic(cData, iData, ageMin, ageMax, gender, ethnicity, coverage,
     customerList = []
     itemList = []
     totalCost = 0
+    totalDemographic = {}
+    tD2 = {}
+    tD3 = {}
+    tD4 = {}
+    tD5 = {}
 
     # Get total number of people in specified demographic
     totalDemographic = {k: v for k, v in cData.items() if v["age"] > ageMin}
-    totalDemographic = {k: v for k, v in cData.items() if v["age"] < ageMax}
-    if gender != -1:
-        totalDemographic = {k: v for k, v in cData.items() if v["gender"] == gender}
-    if ethnicity != -1:
-        totalDemographic = {k: v for k, v in cData.items() if v["ethnicity"] == ethnicity}
-    if zipcode != -1:
-        totalDemographic = {k: v for k, v in cData.items() if v["address"]["zipcode"] == ethnicity}
+    for key in cData.keys():
+        age = int(cData[key]["age"])
+        if isAge(age, int(ageMin), int(ageMax)):
+            print("AGE: " + str(age))
+            totalDemographic[key] = cData[key]
+    print("tD total after age: " + str(len(totalDemographic.keys())))
+    if int(gender) != -1:
+        for key in totalDemographic.keys():
+            pGender = int(cData[key]["gender"])
+            if pGender == int(gender):
+                tD2[key] = totalDemographic[key]
+        # totalDemographic = {k: v for k, v in cData.items() if int(v["gender"]) == gender}
+    if int(ethnicity) != -1:
+        for key in totalDemographic.keys():
+            pGender = int(cData[key]["ethnicity"])
+            if pGender == int(ethnicity):
+                tD3[key] = totalDemographic[key]
+    if int(zipcode) != -1:
+        for key in totalDemographic.keys():
+            pGender = int(cData[key]["zipcode"])
+            if pGender == int(zipcode):
+                tD4[key] = totalDemographic[key]
 
-    return totalDemographic # a subset of cData that matches given demographics!
+    return tD4 # a subset of cData that matches given demographics!
 
 def getRegSale(ageMin, ageMax, gender, ethnicity, coverage, zipcode, discount):
     cData = helper.getCustDataFromFirebase()
+    iDataKeys = helper.getItemDataKeysFromFirebase()
     iData = helper.getItemDataFromFirebase()
     customerList = []
     itemList = []
     totalCost = 0
+    print("Current customer data length: " + str(len(cData.keys())))
     totalDemographic = targetDemographic(cData, iData, ageMin, ageMax, gender, ethnicity, coverage, zipcode)
+    print("totalDemographic length: " + str(len(totalDemographic.keys())))
 
-    for key in iData.keys():
+    for key in iDataKeys:
         interestedPersons = iData[key]["interestedPersons"]
 
         # Begin filtering!
-        interestedPersons = [person for person in interestedPersons if cData[person]["age"] > ageMin and cData[person]["age"] < ageMax]
-        if gender != -1:
-            interestedPersons = [person for person in interestedPersons if cData[person]["gender"] == gender]
-        if ethnicity != -1:
-            interestedPersons = [person for person in interestedPersons if cData[person]["ethnicity"] == ethnicity]
-        if zipcode != -1:
-            interestedPersons = [person for person in interestedPersons if cData[person]["zipcode"] == zipcode]
+        interestedPersons = [person for person in interestedPersons if int(cData[person]["age"]) > int(ageMin) and int(cData[person]["age"]) < int(ageMax)]
+        if int(gender) != -1:
+            interestedPersons = [person for person in interestedPersons if int(cData[person]["gender"]) == int(gender)]
+        if int(ethnicity) != -1:
+            interestedPersons = [person for person in interestedPersons if int(cData[person]["ethnicity"]) == int(ethnicity)]
+        if int(zipcode) != -1:
+            interestedPersons = [person for person in interestedPersons if int(cData[person]["zipcode"]) == int(zipcode)]
 
         # If interestedPersons is not a subset of customerList
         # (if they add new covered customers)
         if not set(interestedPersons) < set(customerList):
+            print("New list of people: " + str(interestedPersons))
             itemList.append(key)
-            totalCost += iData[key]["cost"]
+            totalCost += iData[key]["price"]
             customerList = list(set().union(interestedPersons, customerList))
-            currCoverage = customerList/totalDemographic
-            if currCoverage > coverage:
+            currCoverage = len(customerList)/len(totalDemographic.keys())
+            if currCoverage > float(coverage):
                 break
-    output = { "customerList" : customerList, "itemList" : itemList, "totalCost" : totalCost*discount, "coverage" : currCoverage }
+    output = { "customerList" : customerList, "itemList" : itemList, "totalCost" : totalCost*float(discount), "coverage" : currCoverage }
     return json.dumps(output)
-
-
-
 
 def getEfficientSale(ageMin, ageMax, gender, ethnicity, coverage, zipcode, discount):
     return json.dumps({"code" : "501", "message" : "getEffSale() not implemented"})
