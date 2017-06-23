@@ -47,8 +47,7 @@ def getSale():
 
 @app.route("/api/subscribe", methods=['POST'])
 def redisAddCustomerData():
-    r = redis.StrictRedis(host="172.31.9.87", port=6379, db=0)
-    r.set('foo','bar')
+    r = redis.StrictRedis(host="127.0.0.1", port=6379, db=0)
     s = request.get_json(silent=True)
     print(s)
     customerID = s['customerID']
