@@ -34,8 +34,8 @@ def generateSimulationData(cData, iData, groups):
     return iData
 
 def simulationData():
-    iData = helper.getItemDataFromRedis()
-    cData = helper.getCustDataFromRedis()
+    iData = helper.getItemDataFromFirebase()
+    cData = helper.getCustDataFromFirebase()
 
     group1 = [0.8, 0.3, 0.5, 0.05, 0.05, 0.25]
     group2 = [0.1, 0.5, 0.2, 0.5, 0.30, 0.30]
@@ -65,8 +65,8 @@ def targetDemographic(cData, iData, ageMin, ageMax, gender, ethnicity, coverage,
     return totalDemographic # a subset of cData that matches given demographics!
 
 def getRegSale(ageMin, ageMax, gender, ethnicity, coverage, zipcode, discount):
-    cData = helper.getCustDataFromRedis()
-    iData = helper.getItemDataFromRedis()
+    cData = helper.getCustDataFromFirebase()
+    iData = helper.getItemDataFromFirebase()
     customerList = []
     itemList = []
     totalCost = 0
