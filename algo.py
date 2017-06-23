@@ -70,17 +70,22 @@ def targetDemographic(cData, iData, ageMin, ageMax, gender, ethnicity, coverage,
             pGender = int(cData[key]["gender"])
             if pGender == int(gender):
                 tD2[key] = totalDemographic[key]
-        # totalDemographic = {k: v for k, v in cData.items() if int(v["gender"]) == gender}
+    else:
+        tD2 = totalDemographic
     if int(ethnicity) != -1:
         for key in totalDemographic.keys():
             pGender = int(cData[key]["ethnicity"])
             if pGender == int(ethnicity):
                 tD3[key] = totalDemographic[key]
+    else:
+        tD3 = tD2
     if int(zipcode) != -1:
         for key in totalDemographic.keys():
             pGender = int(cData[key]["zipcode"])
             if pGender == int(zipcode):
                 tD4[key] = totalDemographic[key]
+    else:
+        tD4 = tD3
 
     return tD4 # a subset of cData that matches given demographics!
 
