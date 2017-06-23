@@ -2,6 +2,7 @@ from flask import Flask
 from flask import json
 from flask import request
 from flask_cors import CORS, cross_origin
+from sparkpost import SparkPost
 import redis
 import helper
 
@@ -44,6 +45,28 @@ def getSale():
     else:
          return getRegSale(ageMin, ageMax, gender, ethnicity, coverage, discount)
     return 'Hello'
+
+@app.route("/api/changePrice", methods=['POST'])
+def changePrice():
+    item = request.form["item"]
+    price = request.form["price"]
+    iData = helper.getItemDataFromRedis()
+    if iData[item]["price"] > price:
+        iData[item]["price"] = price
+        name = iData[item]["name"]
+        #PUSH ITEM DATA HERE
+        sp = SparkPost("a6280abfffa83de5381bb5d87cfc6eb9f4fab70e")
+        response = sp.transmissions.send(
+            use_sandbox=False,
+            recipients=['vincentwsong@gmail.com'],
+            html='<p>Your item, ' + name + ' is now on sale!</p>',
+            from_email='nordstrom@vwsong.com',
+            subject='Hello from Nordstrom/SparkPost!'
+        )
+        return "item price updated, emails sent out!"
+
+    return "item price updated!"
+
 
 @app.route("/api/subscribe", methods=['POST'])
 def redisAddCustomerData():
